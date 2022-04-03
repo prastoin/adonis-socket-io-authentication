@@ -1,0 +1,15 @@
+version: '3'
+services:
+    database:
+        image: 'postgres:latest'
+        ports:
+            - ${PG_PORT}:5432
+        environment:
+            POSTGRES_PASSWORD: ${PG_PASSWORD}
+            POSTGRES_USER: ${PG_USER}
+            POSTGRES_DB: ${PG_DB_NAME}
+        volumes:
+            - database-data:/var/lib/postgresql/data/
+volumes:
+    database-data:
+    database-test-data:
