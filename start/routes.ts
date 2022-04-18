@@ -23,6 +23,7 @@ import Route from '@ioc:Adonis/Core/Route'
 const AUTHENTICATION_ROUTE_GROUP_PREFIX = '/authentication'
 Route.group(() => {
   Route.post('/sign-up/web-auth', 'UserAuthenticationsController.webAuthSignUpUser')
+  Route.post('/sign-up/api-tokens', 'UserAuthenticationsController.apiTokensSignUpUser')
 
   Route.get('is-logged-in', () => {
     return true
