@@ -7,10 +7,12 @@
     "build": "node ace build --production",
     "start": "node server.js",
     "lint": "eslint . --ext=.ts",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "test": "node -r @adonisjs/assembler/build/register japafile.ts"
   },
   "devDependencies": {
     "@adonisjs/assembler": "^5.3.0",
+    "@faker-js/faker": "^6.1.1",
     "@types/jsdom": "^16.2.14",
     "@types/supertest": "^2.0.12",
     "adonis-preset-ts": "^2.1.0",
@@ -34,11 +36,13 @@
     "@adonisjs/core": "^5.4.0",
     "@adonisjs/lucid": "^17.1.1",
     "@adonisjs/repl": "^3.1.0",
+    "@adonisjs/session": "^6.2.2",
     "luxon": "^2.3.1",
     "pg": "^8.7.3",
     "proxy-addr": "^2.0.7",
     "reflect-metadata": "^0.1.13",
     "source-map-support": "^0.5.21",
+    "xstate": "^4.31.0",
     "zod": "^3.14.3"
   }
 }
