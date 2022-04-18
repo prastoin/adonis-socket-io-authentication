@@ -14,7 +14,8 @@ Ws.io
     const ctx = HttpContext.create('/', {}, socket.request)
     const auth = AuthManager.getAuthForRequest(ctx)
 
-    if (apiAuthToken) {
+    const shouldUseApiTokensAuthenticationMode = apiAuthToken !== undefined
+    if (shouldUseApiTokensAuthenticationMode) {
       try {
         const user = await auth.use('api').authenticate()
 
@@ -47,7 +48,7 @@ Ws.io
   .on('connection', async (socket) => {
     try {
       const userAuth: User = socket.handshake['user']
-      if (userAuth instanceof User === false) {
+      if (!(userAuth instanceof User)) {
         throw new Error('Should never occurs userAuth is not a User model instance')
       }
 

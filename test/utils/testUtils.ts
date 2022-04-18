@@ -1,6 +1,11 @@
+import { AllClientToServerEvents, AllServerToClientEvents } from 'App/Services/Ws'
+import sinon from 'sinon'
+import { Socket } from 'socket.io-client'
 import { assign, createMachine, DoneInvokeEvent, interpret, StateFrom } from 'xstate'
 
 export const BASE_URL = `http://${process.env.HOST!}:${process.env.PORT!}`
+
+export type TypedClientSocket = Socket<AllServerToClientEvents, AllClientToServerEvents>
 
 //Credit https://github.com/Devessier/xstate-wait-for
 const createWaitForMachine = <ExpectReturn>(timeout: number) =>
@@ -129,4 +134,22 @@ export class AssertionTimeout extends Error {
   constructor() {
     super('Assertion timed out')
   }
+}
+
+export async function asyncNoop(): Promise<void> {
+  return undefined
+}
+
+export function createSpyOnClientSocketEvent<Event extends keyof AllServerToClientEvents>(
+  socket: TypedClientSocket,
+  event: Event
+): sinon.SinonSpy<
+  Parameters<AllServerToClientEvents[Event]>,
+  ReturnType<AllServerToClientEvents[Event]>
+> {
+  const customSpy = sinon.spy<AllServerToClientEvents[Event]>(asyncNoop)
+
+  //@ts-expect-error socket will raise a type error as customSpy doesn't wrap native socket-io event
+  socket.on(event, customSpy)
+  return customSpy
 }
