@@ -22,7 +22,11 @@ import Route from '@ioc:Adonis/Core/Route'
 
 const AUTHENTICATION_ROUTE_GROUP_PREFIX = '/authentication'
 Route.group(() => {
-  Route.post('/sign-up/web-auth', 'AuthenticationController.webAuthSignUpUser')
+  Route.post('/sign-up/web-auth', 'UserAuthenticationsController.webAuthSignUpUser')
+
+  Route.get('is-logged-in', () => {
+    return true
+  }).middleware('auth:web,api')
 }).prefix(AUTHENTICATION_ROUTE_GROUP_PREFIX)
 
 Route.get('/', async () => {

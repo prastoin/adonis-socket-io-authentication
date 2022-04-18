@@ -2,11 +2,11 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import User from 'App/Models/User'
 import * as z from 'zod'
 
-const WebAuthSignUpUserRequestBody = z.object({
+export const WebAuthSignUpUserRequestBody = z.object({
   email: z.string().email(),
   password: z.string().nonempty(),
 })
-type WebAuthSignUpUserRequestBody = z.infer<typeof WebAuthSignUpUserRequestBody>
+export type WebAuthSignUpUserRequestBody = z.infer<typeof WebAuthSignUpUserRequestBody>
 
 export default class UserAuthenticationsController {
   public async webAuthSignUpUser({ request, auth }: HttpContextContract): Promise<void> {
