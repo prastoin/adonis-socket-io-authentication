@@ -1,6 +1,6 @@
 # Adonis & Socket-io authentication example
 
-This repo illustrates the following article `ARTICLE_LINK`.
+This repo illustrates the following [article](https://prastoin.netlify.app/writing/posts/adonis-socket-io-authentication/).
 It contains a working and tested `socket-io` + `adonis` authentication implementation. For both `Web Auth` and `API tokens` Adonis authentication modes.
 
 ## [Web Auth](https://docs.adonisjs.com/guides/auth/web-guard)
