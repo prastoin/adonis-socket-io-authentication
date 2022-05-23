@@ -41,6 +41,7 @@ test.group('Web auth socket io authentication tests group', (group) => {
         socket.emit('GET_ACKNOWLEDGE_SOCKET_CONNECTION')
         assert.isTrue(socketCreationAcknowledgementSpy.called)
       })
+      assert.isTrue(false)
     } catch {
       assert.isFalse(socket.connected)
     }
