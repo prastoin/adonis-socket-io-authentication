@@ -16,14 +16,12 @@ Ws.io
 
     const shouldUseApiTokensAuthenticationMode = apiAuthToken !== undefined
     if (shouldUseApiTokensAuthenticationMode) {
-      try {
-        const user = await auth.use('api').authenticate()
+      const isAuthenticated = await auth.use('api').check()
 
-        socket.handshake['user'] = user
-        console.log('user is authenticated')
+      if (isAuthenticated) {
+        socket.handshake['user'] = auth.user
         next()
-      } catch (e) {
-        console.log('Error api token auth socket is not authenticated')
+      } else {
         next(new Error('User must be authenticated to perform socket protocol'))
       }
     } else {
@@ -36,11 +34,9 @@ Ws.io
           socket.handshake['user'] = auth.user
           next()
         } else {
-          console.log('User must be authenticated to perform socket protocol')
           next(new Error('User must be authenticated to perform socket protocol'))
         }
       } catch (e) {
-        console.log('Adonis session init failed')
         next(new Error('Adonis session init failed'))
       }
     }
@@ -57,7 +53,6 @@ Ws.io
         socket.emit('ACKNOWLEDGE_SOCKET_CONNECTION')
       })
     } catch (e) {
-      console.log('socket.ts global error')
       console.error(e)
     }
   })

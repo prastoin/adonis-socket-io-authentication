@@ -3,12 +3,10 @@ import { Server } from 'socket.io'
 
 export interface AllServerToClientEvents {
   ACKNOWLEDGE_SOCKET_CONNECTION: () => {}
-  PONG: () => {}
 }
 
 export interface AllClientToServerEvents {
   GET_ACKNOWLEDGE_SOCKET_CONNECTION: () => {}
-  WEB_AUTH_PING: () => {}
 }
 
 export type TypedServerSocket = Server<AllClientToServerEvents, AllServerToClientEvents>
